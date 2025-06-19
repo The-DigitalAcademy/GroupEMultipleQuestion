@@ -1,8 +1,6 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class QuestionService implements QuestionInterface {
 
@@ -19,6 +17,32 @@ public class QuestionService implements QuestionInterface {
         System.out.println("...");
 
         scanner.close();
+        randomQuestion();
+    }
+
+    @Override
+    public void userAnswer() {
+
+    }
+
+    @Override
+    public void calculateScores() {
+
+    }
+
+    //choose 10 rondom questions
+    @Override
+    public void randomQuestion() {
+        int randomQuestionNum = 10;
+        Set<Integer> questionNum = new HashSet<>();
+        int count = 0;
+
+
+        while (questionNum.size() < randomQuestionNum) {
+            int randomNum = (int)(Math.random() * 16); // 0 to 15
+            questionNum.add(randomNum);
+        }
+        System.out.println("Unique random numbers: " + questionNum);
     }
 
     public void loadQuestions() {
@@ -69,7 +93,7 @@ public class QuestionService implements QuestionInterface {
                 new String[]{"Tupac Shakur", "Jay-Z", "Notorious B.I.G", "Eminem", "Nas", "Ghostface Killah"}, "Tupac Shakur"));
 
 
-        for (int i = 16; i <= 15; i++) {
+        for (int i = 0; i <= 15; i++) {
             questionList.add(new Question(String.valueOf(i), "Sample question " + i,
                     new String[]{"Option A", "Option B", "Option C", "Option D"}, "Option A"));
         }
