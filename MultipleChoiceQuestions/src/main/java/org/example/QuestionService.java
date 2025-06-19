@@ -8,12 +8,13 @@ public class QuestionService implements QuestionInterface {
     private final Scanner scanner = new Scanner(System.in);
     private int correctAnswers = 0;
     int randomQuestionNum = 10;
+    String userName;
 
     @Override
     public void welcomeMessage() {
         System.out.println("Welcome to our quiz Challenge");
         System.out.print("Please enter your name: ");
-        String userName = scanner.nextLine();
+        userName = scanner.nextLine();
         System.out.println("Thank you, " + userName + "! Let's begin the quiz.");
 
         getQuestion();
@@ -50,13 +51,25 @@ public class QuestionService implements QuestionInterface {
             validateAnswer(input, q);
             System.out.println("-----------------------------");
         }
-//        calculatePercentage();
+        calculatePercentage();
         scanner.close();
     }
 
     @Override
     public void calculatePercentage() {
+        System.out.println(" Quiz complete! \nYou got " + correctAnswers + " out of " + randomQuestionNum + " correct.");
+        double totalScore = ((double) correctAnswers / randomQuestionNum) * 100;
+        System.out.println( userName + " You scored : " + totalScore + "%");
 
+        if (totalScore >= 80) {
+            System.out.println("Excellent score!");
+        } else if (totalScore >= 50) {
+            System.out.println("Pass!");
+        } else if (totalScore >= 40) {
+            System.out.println("Supplementary score!");
+        }else {
+            System.out.println("Failed!");
+        }
     }
 
     //compare answers and increase count
