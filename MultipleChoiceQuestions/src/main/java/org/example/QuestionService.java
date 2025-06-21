@@ -39,18 +39,10 @@ public class QuestionService implements QuestionInterface {
         }
 
         for (Question q : selectedQuestions) {
-            System.out.println("Q" + q.getId() + ": " + q.getQuestion());
-
-            String[] options = q.getOptions();
-            for (int i = 0; i < options.length; i++) {
-                System.out.println((i + 1) + ": " + options[i]);
-            }
-
-            System.out.print("Your answer (choose number): ");
-            String input = scanner.nextLine();
-            validateAnswer(input, q);
-            System.out.println("-----------------------------");
+            displayQuestion(q);
+            validateUserInput(q);
         }
+
         calculatePercentage();
         scanner.close();
     }
@@ -92,7 +84,40 @@ public class QuestionService implements QuestionInterface {
         }
     }
 
+    public void displayQuestion(Question q) {
+        System.out.println("Q" + q.getId() + ": " + q.getQuestion());
+        String[] options = q.getOptions();
 
+        for (int i = 0; i < options.length; i++) {
+            System.out.println((i + 1) + ": " + options[i]);
+        }
+    }
+
+    public void validateUserInput(Question q) {
+        String[] options = q.getOptions();
+
+        while (true) {
+            System.out.print("Your answer (choose number): ");
+            String input = scanner.nextLine().trim();
+
+            try {
+                int index = Integer.parseInt(input) - 1;
+                if (index >= 0 && index < options.length) {
+                    String selectedAnswer = options[index];
+                    if (selectedAnswer.equalsIgnoreCase(q.getAnswer())) {
+                        correctAnswers++;
+                    }
+                    break;
+                } else {
+                    System.out.println("Please choose a number between 1 and " + options.length);
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a number.");
+            }
+        }
+
+        System.out.println("-----------------------------");
+    }
 
     public void getQuestion() {
         System.out.println("Select the correct answer from options below:\n");
