@@ -1,4 +1,8 @@
 package org.example;
+import java.util.Collections;
+import java.util.List;
+import java.util.ArrayList;
+
 
 import java.util.*;
 
@@ -84,13 +88,17 @@ public class QuestionService implements QuestionInterface {
         }
     }
 
+    private int questionCounter = 1; // Add this class field to track question numbers
+
     public void displayQuestion(Question q) {
-        System.out.println("Q" + q.getId() + ": " + q.getQuestion());
+        System.out.println("Q" + questionCounter + ": " + q.getQuestion());
         String[] options = q.getOptions();
 
         for (int i = 0; i < options.length; i++) {
             System.out.println((i + 1) + ": " + options[i]);
         }
+
+        questionCounter++; // Increment after displaying each question
     }
 
     public void validateUserInput(Question q) {
