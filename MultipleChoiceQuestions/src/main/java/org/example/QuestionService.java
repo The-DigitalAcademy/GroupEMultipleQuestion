@@ -42,7 +42,9 @@ public class QuestionService implements QuestionInterface {
             selectedQuestions.add(questionList.get(idx));
         }
 
-        for (Question q : selectedQuestions) {
+        for (int i = 0; i < selectedQuestions.size(); i++) {
+            Question q = selectedQuestions.get(i);
+            System.out.println("\n Question " + (i + 1) + " of " + selectedQuestions.size());
             displayQuestion(q);
             validateUserInput(q);
         }
