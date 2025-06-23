@@ -6,4 +6,5 @@ public interface QuestionInterface {
     public void calculatePercentage();
     public void displayQuestion(Question q);
     public void validateUserInput(Question q);
+
 }
